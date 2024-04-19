@@ -1,0 +1,72 @@
+.ad-section {
+  padding: 50px;
+  text-align: left;
+  background-color: aquamarine;
+}
+
+.ad-section p,
+h4 {
+  font-weight: 600;
+  color: gray;
+}
+
+.ad-section h2 {
+  font-size: 30px;
+}
+
+.products {
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  place-items: center;
+  padding: 20px;
+}
+
+.products img {
+  width: 150px;
+  height: 150px;
+}
+
+.product {
+  background-color: rgba(128, 128, 128, 0.2);
+  border-radius: 15px;
+  width: 300px;
+  height: 350px;
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.product:hover {
+  transition: 0.3s ease-in;
+  cursor: pointer;
+}
+
+.product .description {
+  text-align: center;
+}
+
+.product a {
+  text-decoration: none;
+  color: black;
+}
+
+.addButton {
+  background-color: transparent;
+  border: 2px solid rgb(19, 19, 19);
+  min-width: 100px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 15px;
+}
+
+.addButton:hover {
+  background-color: rgb(19, 19, 19);
+  color: white;
+  cursor: pointer;
+}
