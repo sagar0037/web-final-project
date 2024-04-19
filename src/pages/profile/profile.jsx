@@ -51,7 +51,7 @@ export const Profile = () => {
   return (
     <div>
       {submittedData ? (
-        <div>
+        <div className="submittedData">
           <h2>Entered Data</h2>
           <p>First Name: {submittedData.firstName}</p>
           <p>Last Name: {submittedData.lastName}</p>
@@ -65,7 +65,9 @@ export const Profile = () => {
         <p>No Profile Data</p>
       )}
       <div className="formContainer">
-        <h2>Enter/Change Profile Details</h2>
+        <h2>
+          <center>Enter/Change Profile Details</center>
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="formItem">
             <label>First Name:</label> <br />
