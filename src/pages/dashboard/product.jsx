@@ -1,28 +1,29 @@
-import React, { useContext } from "react";
-import { ProductContext } from "../../context/product-context";
+// pages/dashboard/product.js
+
+import React from "react";
 import { Link } from "react-router-dom";
 
-export const Product = (props) => {
-  const { id, productName, price, description, productImage } = props.data;
-  const { addToCart, cartItems } = useContext(ProductContext);
-
-  const cartItemCount = cartItems[id];
-
+const Product = ({ data }) => {
+  const { _id, description, image, pricing } = data;
   return (
-    <div className="product">
-      <Link to={`/product/${id}`}>
-        <img src={productImage} />
-        <div className="productDetails">
-          <p>
-            <b>{productName}</b>
-          </p>
-          <p>{description}</p>
-          <p> ${price}</p>
+    <div className="col-md-4 mb-4">
+      <div className="card h-100">
+        <img
+          src={image}
+          className="card-img-top img-fluid"
+          alt={description}
+          style={{ maxHeight: "280px", objectFit: "contain" }}
+        />
+        <div className="card-body">
+          <h5 className="card-title">{description}</h5>
+          <p className="card-text">${pricing}</p>
+          <Link to={`/product/${_id}`} className="btn btn-primary">
+            View Details
+          </Link>
         </div>
-      </Link>
-      <button className="addButton" onClick={() => addToCart(id)}>
-        Add To Cart {cartItemCount > 0 && <> ({cartItemCount})</>}
-      </button>
+      </div>
     </div>
   );
 };
+
+export default Product;

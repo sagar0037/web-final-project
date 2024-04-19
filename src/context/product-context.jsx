@@ -1,64 +1,31 @@
-import { createContext, useState } from "react";
-import { PRODUCTS } from "../products";
+// ProductContext.js
+import React, { createContext, useState, useEffect } from "react";
 
-export const ProductContext = createContext(null);
+export const ProductContext = createContext();
 
-// at default there are no items in the cart
-const getDefaultCart = () => {
-  let cart = {};
-  for (let i = 1; i < PRODUCTS.length + 1; i++) {
-    cart[i] = 0;
-  }
-  return cart;
-};
+export const ProductProvider = ({ children }) => {
+  const [products, setProducts] = useState([]);
 
-export const ProductContextProvider = (props) => {
-  const [cartItems, setCartItems] = useState(getDefaultCart());
-
-  //getting total amount of items in the cart
-  const getTotalCartAmount = () => {
-    let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemInfo = PRODUCTS.find((product) => product.id === Number(item));
-        totalAmount += cartItems[item] * itemInfo.price;
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/products");
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
       }
-    }
-    return totalAmount;
-  };
+    };
 
-  //increasing the number of item in the cart by 1
-  const addToCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-  };
-
-  //decreasing the number of item in the cart by 1
-  const removeFromCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-  };
-
-  //updating increased or removed values
-  const updateCartItemCount = (newAmount, itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
-  };
-
-  //deleting all items
-  const deleteAll = () => {
-    setCartItems(getDefaultCart());
-  };
-
-  const contextValues = {
-    cartItems,
-    addToCart,
-    updateCartItemCount,
-    removeFromCart,
-    getTotalCartAmount,
-    deleteAll,
-  };
+    fetchProducts();
+  }, []);
 
   return (
-    <ProductContext.Provider value={contextValues}>
-      {props.children}
+    <ProductContext.Provider value={{ products }}>
+      {children}
     </ProductContext.Provider>
   );
 };

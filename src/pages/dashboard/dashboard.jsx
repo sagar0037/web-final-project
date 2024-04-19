@@ -1,23 +1,18 @@
-import "./dashboard.css";
+// pages/dashboard/dashboard.js
+
 import React from "react";
-import { PRODUCTS } from "../../products";
-import { Product } from "./product";
+import Product from "./product";
 
-export const Dashboard = () => {
+const Dashboard = ({ products }) => {
   return (
-    <div className="dashboard">
-      <section className="ad-section">
-        <h3>Great Offer</h3>
-        <h4>Grab it right now or never!!</h4>
-        <h2>Super Value Deals</h2>
-        <p>TECHNI offer you great deals for all products.</p>
-      </section>
-
-      <section className="products">
-        {PRODUCTS.map((product) => (
-          <Product data={product} />
+    <div className="container">
+      <div className="row">
+        {products.map((product) => (
+          <Product key={product._id} data={product} />
         ))}
-      </section>
+      </div>
     </div>
   );
 };
+
+export default Dashboard;
