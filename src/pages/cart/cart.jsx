@@ -1,44 +1,37 @@
+// cart.jsx
 import React, { useContext } from "react";
 import { ProductContext } from "../../context/product-context";
-import { PRODUCTS } from "../../products";
-import { CartItem } from "./cartitem";
-import { useNavigate } from "react-router-dom";
+import CartItem from "./cartitem";
 import "./cart.css";
+import { Button } from "react-bootstrap";
 
-export const Cart = () => {
-  const { cartItems, getTotalCartAmount, deleteAll } =
-    useContext(ProductContext);
-  const totalAmount = getTotalCartAmount();
+const Cart = () => {
+  const { cartItems, resetCart } = useContext(ProductContext);
 
-  const navigate = useNavigate();
+  const isEmpty = Object.keys(cartItems).length === 0;
 
-  return (
+  const handleResetCart = () => {
+    resetCart();
+  };
+
+  return isEmpty ? (
+    <center>Your cart is empty.</center>
+  ) : (
     <div className="cart">
-      <div>
-        <h1>Your Cart Items</h1>
-
-        {PRODUCTS.map((product) => {
-          if (cartItems[product.id] !== 0) {
-            return <CartItem data={product} />;
-          }
-        })}
+      <h1 className="mb-4">Cart</h1>
+      <div className="cartItem">
+        {Object.keys(cartItems).map((productId) => (
+          <CartItem key={productId} data={productId} />
+        ))}
       </div>
-
-      {totalAmount > 0 ? (
-        <div className="delete">
-          <p> Subtotal: ${totalAmount} </p>
-          <button onClick={() => navigate("/")}> Add More Items </button>
-          <button
-            onClick={() => {
-              deleteAll();
-            }}
-          >
-            Delete All
-          </button>
-        </div>
-      ) : (
-        <h1> Cart is Empty </h1>
-      )}
+      <div className="cartBtn">
+        <Button onClick={handleResetCart}>Remove All</Button>
+      </div>
+      <div className="cartBtn">
+        <Button>Check Out</Button>
+      </div>
     </div>
   );
 };
+
+export default Cart;

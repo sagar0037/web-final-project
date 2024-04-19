@@ -1,14 +1,26 @@
-// pages/dashboard/dashboard.js
+// pages/dashboard/dashboard.jsx
 
-import React from "react";
+import React, { useContext } from "react";
+import { ProductContext } from "../../context/product-context";
 import Product from "./product";
+import "./dashboard.css";
 
-const Dashboard = ({ products }) => {
+const Dashboard = () => {
+  const { products, addToCart } = useContext(ProductContext);
+
   return (
-    <div className="container">
+    <div className="dashboard">
+      <section className="ad-section">
+        <h3>Great Offer</h3>
+        <h4>Grab it right now or never!!</h4>
+        <h2>Super Value Deals</h2>
+        <p>TECHNI offer you great deals for all products.</p>
+      </section>
       <div className="row">
         {products.map((product) => (
-          <Product key={product._id} data={product} />
+          <div key={product._id} className="col-md-4 mb-4">
+            <Product data={product} onAddToCart={addToCart} />
+          </div>
         ))}
       </div>
     </div>

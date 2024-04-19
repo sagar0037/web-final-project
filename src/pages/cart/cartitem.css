@@ -1,0 +1,42 @@
+/* cartitem.css */
+.cartItem {
+  display: block;
+  align-items: center;
+  max-width: 1000px;
+  margin: 10px auto;
+}
+
+.cartItem input {
+  width: 30px;
+  margin: 5px;
+}
+
+.cartItem img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.productDetails {
+  flex: 1;
+}
+
+.countHandler {
+  display: flex;
+  align-items: center;
+}
+
+.countHandler button {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 4px;
+}
+
+.countHandler button:hover {
+  background-color: #0056b3;
+}

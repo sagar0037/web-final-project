@@ -1,72 +1,56 @@
-.ad-section {
-  padding: 50px;
-  text-align: left;
-  background-color: aquamarine;
-}
-
-.ad-section p,
-h4 {
-  font-weight: 600;
-  color: gray;
-}
-
-.ad-section h2 {
-  font-size: 30px;
-}
-
-.products {
-  height: auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 20px;
-  place-items: center;
+.dashboard {
   padding: 20px;
 }
 
-.products img {
-  width: 150px;
-  height: 150px;
+.ad-section {
+  background-color: #f8f9fa;
+  padding: 50px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.ad-section h2 {
+  margin-bottom: 10px;
+}
+
+.ad-section p {
+  margin-bottom: 0;
 }
 
 .product {
-  background-color: rgba(128, 128, 128, 0.2);
-  border-radius: 15px;
-  width: 300px;
-  height: 350px;
-  margin: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
 }
 
 .product:hover {
-  transition: 0.3s ease-in;
-  cursor: pointer;
+  transform: translateY(-5px);
 }
 
-.product .description {
-  text-align: center;
+.product img {
+  width: 100%;
+  height: auto;
 }
 
-.product a {
-  text-decoration: none;
-  color: black;
+.product .card-body {
+  padding: 20px;
 }
 
-.addButton {
-  background-color: transparent;
-  border: 2px solid rgb(19, 19, 19);
-  min-width: 100px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 15px;
+.product h5.card-title {
+  margin-bottom: 10px;
 }
 
-.addButton:hover {
-  background-color: rgb(19, 19, 19);
-  color: white;
-  cursor: pointer;
+.product .card-text {
+  margin-bottom: 0;
+}
+
+.product button {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .product {
+    margin-bottom: 20px;
+  }
 }

@@ -1,22 +1,22 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { PRODUCTS } from "../../products";
 import { ProductContext } from "../../context/product-context";
 import "./product-details.css";
 
 const ProductDetails = () => {
   const { productId } = useParams();
-  const product = PRODUCTS.find(
-    (product) => product.id === parseInt(productId)
-  );
+  const { products, addToCart, cartItems } = useContext(ProductContext);
 
-  const { id, productName, price, description, productImage } = product;
-  const { addToCart, cartItems } = useContext(ProductContext);
-  const cartItemCount = cartItems[id];
+  const product = products.find((product) => product._id === productId);
 
-  return !product ? (
-    <div>Product not found</div>
-  ) : (
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
+  const { _id, productName, price, description, productImage } = product;
+  const cartItemCount = cartItems[_id] || 0;
+
+  return (
     <div className="container">
       <div>
         <img src={productImage} alt={productName} />
@@ -31,7 +31,7 @@ const ProductDetails = () => {
         <div className="info">
           <p>Price: ${price}</p>
         </div>
-        <button className="addButton" onClick={() => addToCart(id)}>
+        <button className="addButton" onClick={() => addToCart(_id)}>
           Add To Cart {cartItemCount > 0 && <> ({cartItemCount})</>}
         </button>
       </div>

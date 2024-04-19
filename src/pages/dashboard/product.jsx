@@ -1,26 +1,24 @@
-// pages/dashboard/product.js
+// pages/dashboard/product.jsx
 
 import React from "react";
 import { Link } from "react-router-dom";
+import "./product.css";
 
-const Product = ({ data }) => {
+const Product = ({ data, onAddToCart }) => {
   const { _id, description, image, pricing } = data;
+
   return (
-    <div className="col-md-4 mb-4">
-      <div className="card h-100">
-        <img
-          src={image}
-          className="card-img-top img-fluid"
-          alt={description}
-          style={{ maxHeight: "280px", objectFit: "contain" }}
-        />
-        <div className="card-body">
-          <h5 className="card-title">{description}</h5>
-          <p className="card-text">${pricing}</p>
-          <Link to={`/product/${_id}`} className="btn btn-primary">
-            View Details
-          </Link>
-        </div>
+    <div className="product card">
+      <img src={image} alt={description} className="card-img-top" />
+      <div className="card-body">
+        <h5 className="card-title">{description}</h5>
+        <p className="card-text">Price: ${pricing}</p>
+        <button className="addCartBtn" onClick={() => onAddToCart(_id)}>
+          Add To Cart
+        </button>
+        <Link to={`/product/${_id}`} className="viewDetailsBtn">
+          View Details
+        </Link>
       </div>
     </div>
   );
